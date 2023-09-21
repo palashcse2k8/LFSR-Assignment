@@ -17,22 +17,19 @@ public class LFSRTestPatternGenerator {
 	
     public static void main(String[] args) {
 
-        
         Scanner sc = new Scanner(System.in);
-        
 
-        
         int optionChoser;
         int numberOfPattern;
         
         while (true) {
-            System.out.println("\n\nSelect circuit to test");
+            System.out.println("\n\nSelect circuit to test\n");
             String [] files = showOptions();
         	optionChoser = sc.nextInt();
         	
-        	String optionChosen = files[optionChoser];
+        	String optionChosen = files[optionChoser-1];
         	
-        	System.out.println("Enter number of patttern to generate for "+ optionChosen + " circuit");
+        	System.out.println("Enter number of pattern to generate for "+ optionChosen + " circuit: ");
         	numberOfPattern = sc.nextInt();
         	
             
@@ -41,6 +38,7 @@ public class LFSRTestPatternGenerator {
     		case "c1355.bench":
     			int numberOfBits = 41;
     			//numberOfTest = 16, coverage = 
+    	        System.out.println("\nGenerating test pattern... ");
     			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits, new int [] {41,40,39,38}) , numberOfPattern);
     			executeCommand(optionChosen);
     			
@@ -49,6 +47,7 @@ public class LFSRTestPatternGenerator {
     		case "c17.bench":
     			numberOfBits = 5;
     			//numberOfTest = 14, coverage = 100
+    	        System.out.println("\nGenerating test pattern... ");
     			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits, new int [] {5,4,3,2}) , numberOfPattern);
     			executeCommand(optionChosen);
     			break;
@@ -56,6 +55,7 @@ public class LFSRTestPatternGenerator {
     		case "c1908.bench":
     			numberOfBits = 33;
     			//numberOfTest = 16
+    	        System.out.println("\nGenerating test pattern... ");
     			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits, new int [] {33,32,29,27}) , numberOfPattern);
     			executeCommand(optionChosen);
     			
@@ -63,6 +63,7 @@ public class LFSRTestPatternGenerator {
     		case "c2670.bench":
     			numberOfBits = 233;
     			//numberOfTest = 16
+    	        System.out.println("\nGenerating test pattern... ");
     			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits, new int [] {233,232,229,224}) , numberOfPattern);
     			executeCommand(optionChosen);
     			
@@ -71,6 +72,7 @@ public class LFSRTestPatternGenerator {
     		case "c3540.bench":
     			numberOfBits = 50;
     			//numberOfTest = 16
+    	        System.out.println("\nGenerating test pattern... ");
     			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits, new int [] {50,48,47,46}) , numberOfPattern);
     			executeCommand(optionChosen);
     			
@@ -79,7 +81,8 @@ public class LFSRTestPatternGenerator {
     		case "c432.bench":
     			numberOfBits = 36;
     			//numberOfTest = 450
-    			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits,  new int [] {36,25}), numberOfPattern);
+    	        System.out.println("\nGenerating test pattern... ");
+    			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits,  new int [] {36,35,29,28}), numberOfPattern);
     			executeCommand(optionChosen);
     			
     			break;
@@ -87,7 +90,8 @@ public class LFSRTestPatternGenerator {
     		case "c499.bench":
     			numberOfBits = 41;
     			//numberOfTest = 450
-    			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits,  new int [] {41,38}), numberOfPattern);
+    	        System.out.println("\nGenerating test pattern... ");
+    			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits,  new int [] {41,40,39,38}), numberOfPattern);
     			executeCommand(optionChosen);
     			
     			break;
@@ -95,7 +99,8 @@ public class LFSRTestPatternGenerator {
     		case "c5315.bench":
     			numberOfBits = 178;
     			//numberOfTest = 450
-    			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits,  new int [] {178,177}), numberOfPattern);
+    	        System.out.println("\nGenerating test pattern... ");
+    			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits,  new int [] {178,176,171,170}), numberOfPattern);
     			executeCommand(optionChosen);
     			
     			break;
@@ -103,6 +108,7 @@ public class LFSRTestPatternGenerator {
     		case "c6288.bench":
     			numberOfBits = 32;
     			//numberOfTest = 16
+    	        System.out.println("\nGenerating test pattern... ");
     			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits, new int [] {32,30,26,25}) , numberOfPattern);
     			executeCommand(optionChosen);
     			
@@ -110,6 +116,7 @@ public class LFSRTestPatternGenerator {
     		case "c7552.bench":
     			numberOfBits = 207;
     			//numberOfTest = 16
+    	        System.out.println("\nGenerating test pattern... ");
     			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits, new int [] {207,206,201,198}) , numberOfPattern);
     			executeCommand(optionChosen);
     			
@@ -118,6 +125,7 @@ public class LFSRTestPatternGenerator {
     			
     			numberOfBits = 60;
     			//numberOfTest = 16
+    	        System.out.println("\nGenerating test pattern... ");
     			generateTestPattern(numberOfBits, generateInitialStateString(numberOfBits), generatePolyBinary(numberOfBits, new int [] {60,58,56,55}) , numberOfPattern);
     			executeCommand(optionChosen);
     			break;
@@ -144,7 +152,15 @@ public class LFSRTestPatternGenerator {
     }
 
     public static String generatePolyBinary(int numberofBits, int [] tapbits) {
-    
+    	
+    	System.out.print("Tapping bits are ->");
+    	for (int i = 0; i < tapbits.length; i++) {
+    		if(i == (tapbits.length-1))
+    			System.out.print(" x^" + tapbits[i] + " + 1\n");
+    		else
+    			System.out.print(" x^" + tapbits[i] + " +");
+		}
+    	System.out.print("");
     	StringBuilder stringBuilder = new StringBuilder();
     	stringBuilder.append("1");
     	
@@ -172,7 +188,7 @@ public class LFSRTestPatternGenerator {
     public static void executeCommand (String circuitName) {
     
         String command = fsimLocation + "fsim.exe -t test_pattern.txt " + circuitName;
-        System.out.println("Executing command: " + command);
+        System.out.println("\nExecuting tests: " + command);
         
         ProcessBuilder builder = new ProcessBuilder(
         		fsimLocation+"fsim.exe", "-t", "test_pattern.txt", circuitName);
@@ -210,8 +226,7 @@ public class LFSRTestPatternGenerator {
         // Create an LFSR with the specified parameters
         LFSR lfsr = new LFSR(numberOfBit, primitivePoly, initialState);
         // Generate test patterns and write to a file
-        System.out.println("\n\nGenerting test pattern with ... ");
-        System.out.println("Number of Input: " + numberOfBit);
+        System.out.println("Number of Bits: " + numberOfBit);
         System.out.println("Initial State: " + initialState);
        
         System.out.println("Primitive Polynomial: " + primitivePoly);
@@ -227,7 +242,7 @@ public class LFSRTestPatternGenerator {
             }
             
             writer.close();
-            System.out.println("Test patterns written to the file test_pattern.txt");
+            System.out.println( numberOfTest + " Test patterns written to the file test_pattern.txt");
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -243,7 +258,7 @@ public class LFSRTestPatternGenerator {
     		
     		files[i] = filesInDirectory[i].getName();
     		
-			System.out.println(i + " : " + files[i]);
+			System.out.println((i+1) + " : " + files[i]);
 		}
     	
     	return files;
