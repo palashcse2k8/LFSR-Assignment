@@ -26,13 +26,13 @@ public class LFSRTestPatternGenerator {
         int numberOfPattern;
         
         while (true) {
-            System.out.println("Select circuit to test");
+            System.out.println("\n\nSelect circuit to test");
             String [] files = showOptions();
         	optionChoser = sc.nextInt();
         	
         	String optionChosen = files[optionChoser];
         	
-        	System.out.println("Enter number of patttern to generate");
+        	System.out.println("Enter number of patttern to generate for "+ optionChosen + " circuit");
         	numberOfPattern = sc.nextInt();
         	
             
@@ -138,7 +138,7 @@ public class LFSRTestPatternGenerator {
             binaryString.append('1');
         }
         
-        System.out.println("Initial State: " + binaryString.toString());
+//        System.out.println("Initial State: " + binaryString.toString());
 
         return binaryString.toString();
     }
@@ -163,8 +163,8 @@ public class LFSRTestPatternGenerator {
     		else
     			stringBuilder.append("0");
 		}  
-    	
-    	System.out.println("primitivePoly > " + stringBuilder);
+//    	
+//    	System.out.println("primitivePoly > " + stringBuilder);
     	return stringBuilder.toString();
     
     }
@@ -210,6 +210,11 @@ public class LFSRTestPatternGenerator {
         // Create an LFSR with the specified parameters
         LFSR lfsr = new LFSR(numberOfBit, primitivePoly, initialState);
         // Generate test patterns and write to a file
+        System.out.println("\n\nGenerting test pattern with ... ");
+        System.out.println("Number of Input: " + numberOfBit);
+        System.out.println("Initial State: " + initialState);
+       
+        System.out.println("Primitive Polynomial: " + primitivePoly);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fsimLocation + "test_pattern.txt"));
             
@@ -222,7 +227,8 @@ public class LFSRTestPatternGenerator {
             }
             
             writer.close();
-//            System.out.println("Test patterns written to the file test_pattern.txt");
+            System.out.println("Test patterns written to the file test_pattern.txt");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
